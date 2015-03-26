@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>主页</title>
+		<title>寻爱管理后台</title>
 		<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 		<!-- Bootstrap 3.3.2 -->
 		<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -11,18 +11,19 @@
 		<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<!-- Theme style -->
 		<link href="lib/AdminLTE/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<link href="lib/AdminLTE/css/skins/skin-blue.css" rel="stylesheet" type="text/css" />
+		<link href="dist/css/xunai.css" rel="stylesheet" type="text/css" />
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body>
-		<!-- Site wrapper -->
+	<body class="skin-blue">
+		<!-- wrapper -->
 		<div class="wrapper">
+			<!-- 顶部 -->
 			<header class="main-header">
-				<a href="index.html" class="logo">LOGO</a>
+				<a href="index.html" class="logo">寻爱管理后台</a>
 				<!-- Header Navbar: style can be found in header.less -->
 				<nav class="navbar navbar-static-top" role="navigation">
 					<!-- Sidebar toggle button-->
@@ -36,13 +37,13 @@
 						<ul class="nav navbar-nav">
 							<li class="dropdown user user-menu">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+									<img src="dist/images/admin.jpg" class="user-image" alt="User Image"/>
 									<span class="hidden-xs">管理员</span>
 								</a>
 								<ul class="dropdown-menu">
 									<!-- User image -->
 									<li class="user-header">
-										<img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+										<img src="dist/images/admin.jpg" class="img-circle" alt="User Image" />
 										<p>
 											管理员 - 管理员
 										</p>
@@ -62,51 +63,385 @@
 					</div>
 				</nav>
 			</header>
+			<!-- 顶部结束 -->
 			<!-- =============================================== -->
-			<!-- Left side column. contains the sidebar -->
+			<!-- 左边栏 -->
 			<aside class="main-sidebar">
 				<!-- sidebar: style can be found in sidebar.less -->
 				<section class="sidebar">
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
 						<li>
-							<a href="../calendar.html">
-								<i class="fa fa-calendar"></i>
-								<span>页面1</span>
+							<a href="checkhead.html">
+								<i class="fa fa-user"></i>
+								<span>头像审核</span>
 							</a>
 						</li>
 						<li>
-							<a href="../mailbox/mailbox.html">
-								<i class="fa fa-envelope"></i>
-								<span>页面2</span>
+							<a href="checkrole.html">
+								<i class="fa fa-tasks"></i>
+								<span>身份审核</span>
 							</a>
 						</li>
 						<li>
-							<a href="../../documentation/index.html">
-								<i class="fa fa-book"></i>
-								<span>页面3</span>
+							<a href="datetree.html">
+								<i class="fa fa-heart"></i>
+								<span>相亲树</span>
+							</a>
+						</li>
+						<li>
+							<a href="index.html">
+								<i class="fa fa-comments"></i>
+								<span>聊天</span>
+							</a>
+						</li>
+						<li class="active">
+							<a href="index.html">
+								<i class="fa fa-cogs"></i>
+								<span>管理</span>
 							</a>
 						</li>
 					</ul>
 				</section>
 				<!-- /.sidebar -->
 			</aside>
+			<!-- 左边栏结束 -->
 			<!-- =============================================== -->
-			<!-- Content Wrapper. Contains page content -->
-			<div class="content-wrapper">
-				<!-- Content Header (Page header) -->
-				<section class="content-header">
-				</section>
-				<!-- Main content -->
-				<section class="content">
-				</section>
-				<!-- /.content -->
+			<!-- 内容页 -->
+			<div class="content-wrapper" id="adminContent">
+				<div class="box">
+					<div role="tabpanel">
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#accountAdmin" aria-controls="accountAdmin" role="tab" data-toggle="tab">兼职管理</a></li>
+							<li role="presentation"><a href="#feedback" aria-controls="feedback" role="tab" data-toggle="tab">建议反馈</a></li>
+						</ul>
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="accountAdmin">
+								<div class="box box-primary top-box">
+								<table class="top-table table table-bordered table-striped table-hover table-condensed">
+									<thead>
+										<tr>
+											<th>子账号</th>
+											<th>工作内容</th>
+											<th>当天</th>
+											<th>上月</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>柠檬</td>
+											<td>聊天</td>
+											<td>
+												<p>已聊：800句</p>
+												<p>已聊用户：50</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>已聊：2200句</p>
+												<p>已聊用户：22</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#recordModal">调用聊天记录
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>糖糖</td>
+											<td>头像审核</td>
+											<td>
+												<p>未审核头像数：3</p>
+												<p>已审核：500</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>未审核：2200</p>
+												<p>已审核：2002</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>柠檬</td>
+											<td>聊天</td>
+											<td>
+												<p>已聊：800句</p>
+												<p>已聊用户：50</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>已聊：2200句</p>
+												<p>已聊用户：22</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#recordModal">调用聊天记录
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>糖糖</td>
+											<td>头像审核</td>
+											<td>
+												<p>未审核头像数：3</p>
+												<p>已审核：500</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>未审核：2200</p>
+												<p>已审核：2002</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>柠檬</td>
+											<td>聊天</td>
+											<td>
+												<p>已聊：800句</p>
+												<p>已聊用户：50</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>已聊：2200句</p>
+												<p>已聊用户：22</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#recordModal">调用聊天记录
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>糖糖</td>
+											<td>头像审核</td>
+											<td>
+												<p>未审核头像数：3</p>
+												<p>已审核：500</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>未审核：2200</p>
+												<p>已审核：2002</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>柠檬</td>
+											<td>聊天</td>
+											<td>
+												<p>已聊：800句</p>
+												<p>已聊用户：50</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>已聊：2200句</p>
+												<p>已聊用户：22</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#recordModal">调用聊天记录
+												</button>
+											</td>
+										</tr>
+										<tr>
+											<td>糖糖</td>
+											<td>头像审核</td>
+											<td>
+												<p>未审核头像数：3</p>
+												<p>已审核：500</p>
+											</td>
+											<td>
+												<p>登录天数：22</p>
+												<p>平均每天登录次数：22</p>
+												<p>平均每天在线时长：22</p>
+												<p>未审核：2200</p>
+												<p>已审核：2002</p>
+											</td>
+											<td>
+												<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#editModal">修改账号信息
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								</div>
+								<div class="box box-primary bottom-box">
+									<div class="box-header">
+									<h3 class="box-title">添加子账号</h3>
+									</div>
+						<div class="box-body">
+									<form role="form" class="form-inline">
+										<div class="newAcctBody">
+							<div class="form-group">
+								<label for="exampleInputEmail1">用户名</label>
+								<input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">密码</label>
+								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+							</div>
+							<div class="form-group">
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox"> 聊天
+								</label>
+							</div>
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox"> 头像审核
+								</label>
+							</div>
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox"> 身份审核
+								</label>
+							</div>
+							</div>
+							</div>
+							<button type="submit" class="btn btn-primary">
+								<i class="fa fa-plus"></i>&nbsp;添加</button>
+							<button type="reset" class="btn btn-default">
+								<i class="fa fa-reply"></i>&nbsp;清空</button>
+									</form>
+						</div>
+						<div class="box-footer">
+						</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="feedback">
+								<div class="box box-primary">
+
+								<table class="table table-bordered table-striped table-hover table-condensed">
+									<thead>
+										<tr>
+											<th>时间</th>
+											<th>用户ID</th>
+											<th>反馈内容</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>2.15 14:32:12</td>
+											<td>11111</td>
+											<td>充值不成功啊</td>
+										</tr>
+										<tr>
+											<td>2.15 14:32:12</td>
+											<td>11111</td>
+											<td>头像审核好久明明是真人却不让过！充值不成功啊</td>
+										</tr>
+										<tr>
+											<td>2.15 14:32:12</td>
+											<td>123445</td>
+											<td>充值不成功啊</td>
+										</tr>
+									</tbody>
+								</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<!-- /.content-wrapper -->
+			<!-- 内容页结束 -->
+			<!-- =============================================== -->
+			<!-- 底部 -->
 			<footer class="main-footer">
 			</footer>
+			<!-- 底部结束 -->
 		</div>
 		<!-- ./wrapper -->
+		<!-- 弹出层 -->
+		<div class="modal fade" id="editModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">修改账号信息</h4>
+					</div>
+					<div class="modal-body">
+							<div class="form-group">
+								<label for="InputAccount">子账号</label>
+								<input type="text" class="form-control" id="InputAccount" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="InputPassword">原密码</label>
+								<input type="password" class="form-control" id="InputPassword" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="InputPassword1">修改密码</label>
+								<input type="text" class="form-control" id="InputPassword1" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="InputPassword2">重复密码</label>
+								<input type="password" class="form-control" id="InputPassword2" placeholder="">
+							</div>
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox"> 聊天
+								</label>
+							</div>
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox"> 头像审核
+								</label>
+							</div>
+							<div class="checkbox-inline">
+								<label>
+									<input type="checkbox"> 身份审核
+								</label>
+							</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">确认修改</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="recordModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">账号聊天记录</h4>
+					</div>
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 弹出层结束 -->
 		<!-- jQuery 2.1.3 -->
 		<script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
 		<!-- Bootstrap 3.3.2 JS -->
@@ -116,6 +451,8 @@
 		<!-- FastClick -->
 		<script src='plugins/fastclick/fastclick.min.js'></script>
 		<!-- AdminLTE App -->
-		<script src="lib/AdminLTE/js/app.min.js" type="text/javascript"></script>
+		<script src="lib/AdminLTE/js/app.js" type="text/javascript"></script>
+
+		<script src="dist/js/xunai.js" type="text/javascript"></script>
 	</body>
 </html>
