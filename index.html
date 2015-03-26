@@ -11,16 +11,16 @@
 		<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<!-- Theme style -->
 		<link href="lib/AdminLTE/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-		<link href="dist/css/xunai.css" rel="stylesheet" type="text/css" />
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
 	</head>
 	<body>
-		<!-- wrapper -->
+		<!-- Site wrapper -->
 		<div class="wrapper">
-			<!-- 顶部 -->
 			<header class="main-header">
 				<a href="index.html" class="logo">LOGO</a>
 				<!-- Header Navbar: style can be found in header.less -->
@@ -62,9 +62,8 @@
 					</div>
 				</nav>
 			</header>
-			<!-- 顶部结束 -->
 			<!-- =============================================== -->
-			<!-- 左边栏 -->
+			<!-- Left side column. contains the sidebar -->
 			<aside class="main-sidebar">
 				<!-- sidebar: style can be found in sidebar.less -->
 				<section class="sidebar">
@@ -92,220 +91,22 @@
 				</section>
 				<!-- /.sidebar -->
 			</aside>
-			<!-- 左边栏结束 -->
 			<!-- =============================================== -->
-			<!-- 内容页 -->
+			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
-				<div class="box">
-					<div role="tabpanel">
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">tab1</a></li>
-							<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">tab2</a></li>
-						</ul>
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane fade in active" id="home">
-								<table class="top-table table table-bordered table-striped table-hover table-condensed">
-									<thead>
-										<tr>
-											<th>表头1</th>
-											<th>表头2</th>
-											<th>表头3</th>
-											<th>表头4</th>
-											<th>表头5</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>cs</td>
-											<td>cs</td>
-											<td>
-												<p>row1</p>
-												<p>row2</p>
-											</td>
-											<td>
-												<p>row1</p>
-												<p>row2</p>
-												<p>row3</p>
-												<p>row4</p>
-												<p>row5</p>
-											</td>
-											<td>
-												<button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#editModal">btn1
-												</button>
-												<button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#editModal">btn2
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>cs</td>
-											<td>cs</td>
-											<td>
-												<p>row1</p>
-												<p>row2</p>
-											</td>
-											<td>
-												<p>row1</p>
-												<p>row2</p>
-												<p>row3</p>
-												<p>row4</p>
-												<p>row5</p>
-											</td>
-											<td>
-												<button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#editModal">btn1
-												</button>
-												<button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#editModal">btn2
-												</button>
-											</td>
-										</tr>
-										<tr>
-											<td>cs</td>
-											<td>cs</td>
-											<td>
-												<p>row1</p>
-												<p>row2</p>
-											</td>
-											<td>
-												<p>row1</p>
-												<p>row2</p>
-												<p>row3</p>
-												<p>row4</p>
-												<p>row5</p>
-											</td>
-											<td>
-												<button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#editModal">btn1
-												</button>
-												<button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#editModal">btn2
-												</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="profile">
-								<table class="table table-bordered table-striped table-hover table-condensed">
-									<thead>
-										<tr>
-											<th>表头1</th>
-											<th>表头2</th>
-											<th>表头3</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>se</td>
-											<td>se</td>
-											<td>se</td>
-										</tr>
-										<tr>
-											<td>se</td>
-											<td>se</td>
-											<td>se</td>
-										</tr>
-										<tr>
-											<td>se</td>
-											<td>se</td>
-											<td>se</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+				</section>
+				<!-- Main content -->
+				<section class="content">
+				</section>
+				<!-- /.content -->
 			</div>
-			<!-- 内容页结束 -->
-			<!-- =============================================== -->
-			<!-- 底部 -->
+			<!-- /.content-wrapper -->
 			<footer class="main-footer">
-				<div class="box box-primary">
-					<div class="box-header">
-						<h3 class="box-title">add newer</h3>
-					</div>
-					<form role="form">
-						<div class="box-body">
-							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">Password</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-							</div>
-							<div class="checkbox-inline">
-								<label>
-									<input type="checkbox"> Check1
-								</label>
-							</div>
-							<div class="checkbox-inline">
-								<label>
-									<input type="checkbox"> Check2
-								</label>
-							</div>
-							<div class="checkbox-inline">
-								<label>
-									<input type="checkbox"> Check3
-								</label>
-							</div>
-						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-info">submit</button>
-							<button type="reset" class="btn btn-warning">reset</button>
-						</div>
-					</form>
-				</div>
 			</footer>
-			<!-- 底部结束 -->
 		</div>
 		<!-- ./wrapper -->
-		<!-- 弹出层 -->
-		<div class="modal fade" id="editModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">Modal title</h4>
-					</div>
-					<div class="modal-body">
-							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">Password</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">Password</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-							</div>
-							<div class="checkbox-inline">
-								<label>
-									<input type="checkbox"> Check1
-								</label>
-							</div>
-							<div class="checkbox-inline">
-								<label>
-									<input type="checkbox"> Check2
-								</label>
-							</div>
-							<div class="checkbox-inline">
-								<label>
-									<input type="checkbox"> Check3
-								</label>
-							</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 弹出层结束 -->
 		<!-- jQuery 2.1.3 -->
 		<script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
 		<!-- Bootstrap 3.3.2 JS -->
@@ -315,6 +116,6 @@
 		<!-- FastClick -->
 		<script src='plugins/fastclick/fastclick.min.js'></script>
 		<!-- AdminLTE App -->
-		<script src="lib/AdminLTE/js/app.js" type="text/javascript"></script>
+		<script src="lib/AdminLTE/js/app.min.js" type="text/javascript"></script>
 	</body>
 </html>
