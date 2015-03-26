@@ -11,7 +11,8 @@ html,body{
 .box{
 	margin-bottom: 5px;
 }
-.top-table.table tbody td{
+.top-table.table tbody td,
+.text-middle.table tbody td{
 	display: table-cell;
 	vertical-align: inherit;
 }
