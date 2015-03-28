@@ -31,3 +31,27 @@ body{font-family:"微软雅黑";}
 .head-check-item.active i.fa-square-o{display:none;}
 .head-check-item input[type=checkbox]{display:none;}
 .pagination{margin:0;margin-right:20px;float:right;}
+.chat-count{float:right;margin-right:20px;}
+.info-box-icon .user-image{width: 90px;height: 90px;vertical-align: top;}
+.info-box-text{line-height: 26px;}
+.chat-user-list.nav-stacked>li.active>a, 
+.chat-user-list.nav-stacked>li.active>a:hover{
+	background-color: #3c8dbc;
+border-top: 0;
+border-left-color: #3c8dbc;
+color: #fff;
+}
+.direct-chat-warning .right>.direct-chat-text{
+	background: #f39c12;
+border-color: #f39c12;
+color: #fff;
+}
+.btn-app.btn-primary{
+	background-color: #3c8dbc;
+	color: #fff;
+}
+.margin-left-0{margin-left:0;}
+.btn-app.btn-warning{
+	background-color: #f39c12;
+	color: #fff;
+}
