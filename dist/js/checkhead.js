@@ -136,6 +136,34 @@ var faceList = {
 	deleteCheck: function(idArray) {
 
 	},
+	//查询
+	searchByNick: function(nick){
+		var me = this;
+		$.ajax({
+				url: me.getUrl + "/user/nick",
+				type: 'GET',
+				dataType: 'jsonp',
+				data: {
+					"nick": encodeURI(nick)
+				},
+				jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+				jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+			})
+			.done(function(data) {
+				switch (me.state) {
+					case 1:
+						me._renderNocheck(data);
+						me._rebendEvent();
+						break;
+					case 2:
+						break;
+					case 3:
+						me._renderRefusecheck(data);
+						me._rebendEvent();
+						break;
+				}
+			});
+	},
 	//获取选择的id列表
 	_getIdlist: function(btn) {
 		var me = this;
@@ -213,7 +241,11 @@ var faceList = {
 			var idArray = list._getIdlist(me);
 			list.refuseCheck(idArray);
 		});
-
+		$("#searchbtn").unbind('click').bind("click", function(event) {
+			var me = $(this);
+			var nick = $("#nicktext").val();
+			list.searchByNick(nick);
+		});
 	},
 	//重新绑定事件
 	_rebendEvent: function() {

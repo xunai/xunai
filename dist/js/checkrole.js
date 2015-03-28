@@ -203,7 +203,6 @@ var faceList = {
 			var idArray = list._getIdlist(me);
 			list.refuseCheck(idArray);
 		});
-
 	},
 	//重新绑定事件
 	_rebendEvent: function() {
