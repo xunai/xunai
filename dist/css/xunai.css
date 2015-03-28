@@ -25,9 +25,15 @@ body{font-family:"微软雅黑";}
 @media (max-width:768px){
 	.img-head{width:100px;height:100px;}
 }
-.head-check-item i{display:none;position:absolute;right:15px;top:15px;font-size:25px;margin-top:0;background:transparent;}
+.head-check-item i{display:none;position:absolute;right:0px;top:0px;font-size:22px;margin-top:0;background:transparent;}
+.head-check-item .facelabel{position: absolute;
+left: 0px;
+top: 0px;
+width: 48px;
+height: 30px;}
+.head-check-item .facelabel i{display: inline-block;position: relative;}
 .head-check-item i.fa-square-o{display:block;}
-.head-check-item.active i.fa-check-square-o{display:block;}
+.head-check-item.active i.fa-check-square-o{display:block;color:#fff;}
 .head-check-item.active i.fa-square-o{display:none;}
 .head-check-item input[type=checkbox]{display:none;}
 .pagination{margin:0;margin-right:20px;float:right;}
@@ -55,3 +61,4 @@ color: #fff;
 	background-color: #f39c12;
 	color: #fff;
 }
+#roleList>li{display: none;}
