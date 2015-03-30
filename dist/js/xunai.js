@@ -17,6 +17,7 @@ $(function() {
             me.addClass("active");
       });
 });
+//登录权限检查模块
 var g_loginuser = {
       xunai_nick: '',
       xunai_username: '',
@@ -35,6 +36,11 @@ var g_loginuser = {
                   }
                   //登录超时自动登出
                   else if (storage.xunai_lasttime < timerange) {
+                        storage.xunai_nick = "";
+                        storage.xunai_username = "";
+                        storage.xunai_role = "";
+                        storage.xunai_uid = "";
+                        storage.xunai_lasttime = "";
                         window.location.href = "login.html";
                   } else {
                         me.xunai_nick = storage.xunai_nick;
@@ -49,7 +55,7 @@ var g_loginuser = {
       setLoginInfo: function() {
             var me = this,
                   roleinf,
-                  hrefarray=[],
+                  hrefarray = [],
                   hasRole = false;
             $(".loginnick").text(me.xunai_nick);
             $(".loginname").text(me.xunai_username);
@@ -62,11 +68,11 @@ var g_loginuser = {
                   }
             });
             for (var i = 0; i < hrefarray.length; i++) {
-                  if(hrefarray[i]==window.location.pathname.split("/")[1]){
+                  if (hrefarray[i] == window.location.pathname.split("/")[1]) {
                         hasRole = true;
                   }
             }
-            if(!hasRole){
+            if (!hasRole) {
                   window.location.href = hrefarray[0];
             }
       },
@@ -75,6 +81,7 @@ var g_loginuser = {
             var me = this;
             me.getLoginstate();
       },
+      //登出
       loginOut: function() {
             if (window.localStorage) {
                   var storage = window.localStorage;
@@ -88,3 +95,21 @@ var g_loginuser = {
       }
 };
 var g_host = "http://aus.appforwhom.com/aus/";
+//日期格式化
+Date.prototype.format = function(format) {
+      var o = {
+            "M+": this.getMonth() + 1, //month  
+            "d+": this.getDate(), //day  
+            "h+": this.getHours(), //hour  
+            "m+": this.getMinutes(), //minute  
+            "s+": this.getSeconds(), //second  
+            "q+": Math.floor((this.getMonth() + 3) / 3), //quarter  
+            "S": this.getMilliseconds() //millisecond  
+      };
+      if (/(y+)/.test(format))
+            format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      for (var k in o)
+            if (new RegExp("(" + k + ")").test(format))
+                  format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+      return format;
+};
