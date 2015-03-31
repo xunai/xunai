@@ -4,18 +4,17 @@ $(function() {
             g_loginuser.loginOut();
       });
       var window_height = $(window).height();
-      $(".top-box").css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight() - 125);
+      if ($(".top-box").hasClass('no-toolbar')) {
+            $(".top-box").css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight());
+      } else {
+            $(".top-box").css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight() - 125);
+      }
       var otheight = 0;
       $(".direct-chat-messages").parent().parent().children(".box-body:gt(0)").each(function(index, element) {
             otheight += $(element).height();
       });
       $(".direct-chat-messages").css("height", $(".top-box").height() - $(".top-box").children(".box-header").height() - otheight - 165);
 
-      $(".chat-user-list li").click(function() {
-            var me = $(this);
-            $(".chat-user-list li").removeClass("active");
-            me.addClass("active");
-      });
 });
 //登录权限检查模块
 var g_loginuser = {

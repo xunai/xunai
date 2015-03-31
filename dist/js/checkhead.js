@@ -86,9 +86,13 @@ var faceList = {
 	},
 	//通过审核
 	passCheck: function(idArray) {
-		var me = this;
-		for (var i = 0; i < idArray.length; i++) {
-			var id = idArray[i];
+		var me = this,
+			i = 0;
+		var passFun = function(index) {
+			if (index >= idArray.length) {
+				return;
+			}
+			id = idArray[index];
 			$.ajax({
 					url: me.getUrl + "/fv/update/id",
 					type: 'GET',
@@ -105,14 +109,21 @@ var faceList = {
 						var dom = $(this);
 						dom.remove();
 					});
+					index++;
+					passFun(index);
 				});
-		}
+		};
+		passFun(0);
 	},
 	//审核拒绝
 	refuseCheck: function(idArray) {
-		var me = this;
-		for (var i = 0; i < idArray.length; i++) {
-			var id = idArray[i];
+		var me = this,
+			i = 0;
+		var refuseFun = function(index) {
+			if (index >= idArray.length) {
+				return;
+			}
+			id = idArray[index];
 			$.ajax({
 					url: me.getUrl + "/fv/update/id",
 					type: 'GET',
@@ -128,16 +139,19 @@ var faceList = {
 					$(".head-check-item[data-checkid=" + id + "]").fadeOut(function() {
 						var dom = $(this);
 						dom.remove();
+						index++;
+						refuseFun(index);
 					});
 				});
-		}
+		};
+		refuseFun(0);
 	},
 	//删除审核
 	deleteCheck: function(idArray) {
 
 	},
 	//查询
-	searchByNick: function(nick){
+	searchByNick: function(nick) {
 		var me = this;
 		$.ajax({
 				url: me.getUrl + "/user/nick",
