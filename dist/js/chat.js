@@ -168,7 +168,13 @@ var chatDOM = {
 	//发送消息
 	sendMsg: function() {
 		var me = this,
-			sendContent = $("#sendinput").val();
+			sendContent = $("#sendinput").val(),
+			sendData = "";
+		if (sendContent == ""){
+			return false;
+		} else {
+			sendData = '{"chatType":1,"content":"' + sendContent + '"}';
+		}
 		$.ajax({
 				url: me.getUrl + "/mo/send",
 				type: 'GET',
@@ -176,7 +182,7 @@ var chatDOM = {
 				data: {
 					"uid": me.uid,
 					"rid": me.rid,
-					"content": encodeURI(sendContent)
+					"content": encodeURI(sendData)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -220,6 +226,7 @@ var chatDOM = {
 					}
 				});
 				me.destroyLoop();
+				chatUserlist.init();
 			});
 	},
 	//清除循环查询

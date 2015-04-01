@@ -28,8 +28,8 @@ var faceList = {
 				data: {
 					"state": state
 				},
-				jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-				jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+				jsonp: "callbackparam",
+				jsonpCallback: "callback"
 			})
 			.done(function(data) {
 				switch (me.state) {
@@ -46,33 +46,32 @@ var faceList = {
 	getList: function(state, pageNum) {
 		var me = this;
 		$.ajax({
-				url: me.getUrl + "/fv/list",
-				type: 'GET',
-				dataType: 'jsonp',
-				data: {
-					"state": state,
-					"page": pageNum
-				},
-				jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-				jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-			})
-			.done(function(data) {
-				me.page[me.state] = pageNum;
-				switch (state) {
-					case 1:
-						me._renderNocheck(data);
-						me.getCount(me.state);
-						me._rebendEvent();
-						break;
-					case 2:
-						break;
-					case 3:
-						me._renderRefusecheck(data);
-						me.getCount(me.state);
-						me._rebendEvent();
-						break;
-				}
-			});
+			url: me.getUrl + "/fv/list",
+			type: 'GET',
+			dataType: 'jsonp',
+			data: {
+				"state": state,
+				"page": pageNum
+			},
+			jsonp: "callbackparam",
+			jsonpCallback: "callback"
+		}).done(function(data) {
+			me.page[me.state] = pageNum;
+			switch (state) {
+				case 1:
+					me._renderNocheck(data);
+					me.getCount(me.state);
+					me._rebendEvent();
+					break;
+				case 2:
+					break;
+				case 3:
+					me._renderRefusecheck(data);
+					me.getCount(me.state);
+					me._rebendEvent();
+					break;
+			}
+		});
 	},
 	//下一页
 	nextPage: function() {
@@ -94,24 +93,23 @@ var faceList = {
 			}
 			id = idArray[index];
 			$.ajax({
-					url: me.getUrl + "/fv/update/id",
-					type: 'GET',
-					dataType: 'jsonp',
-					data: {
-						"state": 2,
-						"id": id
-					},
-					jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-					jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-				})
-				.done(function(data) {
-					$(".head-check-item[data-checkid=" + id + "]").fadeOut(function() {
-						var dom = $(this);
-						dom.remove();
-					});
-					index++;
-					passFun(index);
+				url: me.getUrl + "/fv/update/id",
+				type: 'GET',
+				dataType: 'jsonp',
+				data: {
+					"state": 2,
+					"id": id
+				},
+				jsonp: "callbackparam",
+				jsonpCallback: "callback"
+			}).done(function(data) {
+				$(".head-check-item[data-checkid=" + id + "]").fadeOut(function() {
+					var dom = $(this);
+					dom.remove();
 				});
+				index++;
+				passFun(index);
+			});
 		};
 		passFun(0);
 	},
@@ -125,24 +123,23 @@ var faceList = {
 			}
 			id = idArray[index];
 			$.ajax({
-					url: me.getUrl + "/fv/update/id",
-					type: 'GET',
-					dataType: 'jsonp',
-					data: {
-						"state": 3,
-						"id": id
-					},
-					jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-					jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-				})
-				.done(function(data) {
-					$(".head-check-item[data-checkid=" + id + "]").fadeOut(function() {
-						var dom = $(this);
-						dom.remove();
-						index++;
-						refuseFun(index);
-					});
+				url: me.getUrl + "/fv/update/id",
+				type: 'GET',
+				dataType: 'jsonp',
+				data: {
+					"state": 3,
+					"id": id
+				},
+				jsonp: "callbackparam",
+				jsonpCallback: "callback"
+			}).done(function(data) {
+				$(".head-check-item[data-checkid=" + id + "]").fadeOut(function() {
+					var dom = $(this);
+					dom.remove();
+					index++;
+					refuseFun(index);
 				});
+			});
 		};
 		refuseFun(0);
 	},
@@ -154,29 +151,28 @@ var faceList = {
 	searchByNick: function(nick) {
 		var me = this;
 		$.ajax({
-				url: me.getUrl + "/user/nick",
-				type: 'GET',
-				dataType: 'jsonp',
-				data: {
-					"nick": encodeURI(nick)
-				},
-				jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-				jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-			})
-			.done(function(data) {
-				switch (me.state) {
-					case 1:
-						me._renderNocheck(data);
-						me._rebendEvent();
-						break;
-					case 2:
-						break;
-					case 3:
-						me._renderRefusecheck(data);
-						me._rebendEvent();
-						break;
-				}
-			});
+			url: me.getUrl + "/user/nick",
+			type: 'GET',
+			dataType: 'jsonp',
+			data: {
+				"nick": encodeURI(nick)
+			},
+			jsonp: "callbackparam",
+			jsonpCallback: "callback"
+		}).done(function(data) {
+			switch (me.state) {
+				case 1:
+					me._renderNocheck(data);
+					me._rebendEvent();
+					break;
+				case 2:
+					break;
+				case 3:
+					me._renderRefusecheck(data);
+					me._rebendEvent();
+					break;
+			}
+		});
 	},
 	//获取选择的id列表
 	_getIdlist: function(btn) {

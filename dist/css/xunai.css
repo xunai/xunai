@@ -34,14 +34,8 @@ body{font-family:"微软雅黑";}
 .head-check-item input[type=checkbox]{display:none;}
 .pagination{margin:0;margin-right:20px;float:right;}
 .chat-count{float:right;margin-right:20px;}
-.info-box{
-	margin-bottom: 0;
-	min-height: 60px;
-}
-.info-box-icon{
-	height: 60px;
-	width: 60px;
-}
+.info-box{margin-bottom:0;min-height:60px;}
+.info-box-icon{height:60px;width:60px;background-color:transparent;border-color:transparent;}
 .info-box-icon .user-image{width:60px;height:60px;vertical-align:top;}
 .info-box-text{line-height:18px;}
 .chat-user-list.nav-stacked>li.active>a,
@@ -85,4 +79,4 @@ body{font-family:"微软雅黑";}
 	75%{transform:scale(1.2,1.2);}
 	100%{transform:scale(1,1);}
 }
-.playaudio{color:#6633CC;font-size: 24px;cursor: pointer;}
+.playaudio{color:#6633CC;font-size:24px;cursor:pointer;}
