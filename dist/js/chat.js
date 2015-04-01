@@ -74,6 +74,8 @@ var chatDOM = {
 	getUrl: g_host + "/ba/1/ck/x/7u/1n/a/2i/sy/st/m",
 	uid: "", //用户ID
 	rid: "", //机器人ID
+	loop: false,
+	loopTime: 3000,
 	//更新整个dom
 	updateDom: function(uid, rid, needRefresh) {
 		var me = this;
@@ -87,13 +89,15 @@ var chatDOM = {
 					"uid": me.uid,
 					"rid": me.rid
 				},
-				jsonp: "callbackparam", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-				jsonpCallback: "callback" //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+				jsonp: "callbackparam",
+				jsonpCallback: "callback"
 			})
 			.done(function(data) {
 				if (needRefresh === true) {
+					me.destroyLoop();
 					me.renderUserinfo(data.robot, data.user);
 					me.renderChatcontent(data.chats, data.robot, data.user);
+					me._bendEvent();
 				} else {
 					me.renderChatcontent(data.chats, data.robot, data.user);
 				}
@@ -101,30 +105,31 @@ var chatDOM = {
 	},
 	//渲染用户信息
 	renderUserinfo: function(rData, uData) {
+		var me = this;
 		//机器人信息
 		$("#robotFace").attr('src', rData.face);
 		$("#robotName").text(rData.nick ? rData.nick : "未知");
 		var rAge = rData.birth ? parseInt((new Date() - new Date(rData.birth)) / (365 * 24 * 60 * 60 * 1000)) : "未知",
 			rHeight = rData.height ? rData.height + "cm" : "未知",
-			rEdu = rData.edu ? rData.edu : "未知",
-			rJob = rData.job ? rData.job : "未知",
-			rMarry = rData.marry ? rData.marry : "未知",
-			rCity = rData.city ? rData.city : "未知";
-		var robotInfo = "年龄：" + rAge + " 身高：" + rHeight + " 教育程度：" + rEdu + " 职业：" + rJob + " 婚姻状况：" + rMarry;
-		$("#robotInfo").text(robotInfo);
-		$("#robotCity").text("所在城市：" + rCity);
+			rEdu = rData.edu ? eduMap[rData.edu] : "未知",
+			rJob = rData.job ? jobMap[rData.job] : "未知",
+			rMarry = rData.marry ? marryMap[rData.marry] : "未知",
+			rLocation = me._getLocation(rData);
+		var robotInfo = "年龄：" + rAge + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;身高：" + rHeight + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育程度：" + rEdu + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;职业：" + rJob + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻状况：" + rMarry;
+		$("#robotInfo").html(robotInfo);
+		$("#robotCity").text("所在城市：" + rLocation);
 		//用户信息
 		$("#userFace").attr('src', uData.face);
 		$("#userName").text(uData.nick ? uData.nick : "未知");
 		var uAge = uData.birth ? parseInt((new Date() - new Date(uData.birth)) / (365 * 24 * 60 * 60 * 1000)) : "未知",
 			uHeight = uData.height ? uData.height + "cm" : "未知",
-			uEdu = uData.edu ? uData.edu : "未知",
-			uJob = uData.job ? uData.job : "未知",
-			uMarry = uData.marry ? uData.marry : "未知",
-			uCity = uData.city ? uData.city : "未知";
-		var userInfo = "年龄：" + uAge + " 身高：" + uHeight + " 教育程度：" + uEdu + " 职业：" + uJob + " 婚姻状况：" + uMarry;
-		$("#userInfo").text(userInfo);
-		$("#userCity").text("所在城市：" + uCity);
+			uEdu = uData.edu ? eduMap[uData.edu] : "未知",
+			uJob = uData.job ? jobMap[uData.job] : "未知",
+			uMarry = uData.marry ? marryMap[uData.marry] : "未知",
+			uLocation = me._getLocation(uData);
+		var userInfo = "年龄：" + uAge + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;身高：" + uHeight + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育程度：" + uEdu + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;职业：" + uJob + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;婚姻状况：" + uMarry;
+		$("#userInfo").html(userInfo);
+		$("#userCity").text("所在城市：" + uLocation);
 	},
 	//渲染聊天内容
 	renderChatcontent: function(chatContent, rData, uData) {
@@ -148,7 +153,7 @@ var chatDOM = {
 					'</span><span class="direct-chat-timestamp">' + new Date(cData.ctime).format("yyyy-MM-dd hh:mm:ss") +
 					'</span></div>' +
 					'<img class="direct-chat-img" src="' + face + '" alt="message user image" />' +
-					'<div class="direct-chat-text">' + cData.content + '</div>';
+					'<div class="direct-chat-text">' + me._renderMsg(cData.content) + '</div>';
 				dom.html(chatText);
 				$("#chat-list").append(dom);
 			};
@@ -156,17 +161,159 @@ var chatDOM = {
 		for (var i = 0; i < chatContent.length; i++) {
 			renderChat(chatContent[i], rData, uData);
 		}
+		me.loop = window.setTimeout(function() {
+			me.updateDom();
+		}, me.loopTime);
 	},
 	//发送消息
 	sendMsg: function() {
-
+		var me = this,
+			sendContent = $("#sendinput").val();
+		$.ajax({
+				url: me.getUrl + "/mo/send",
+				type: 'GET',
+				dataType: 'jsonp',
+				data: {
+					"uid": me.uid,
+					"rid": me.rid,
+					"content": encodeURI(sendContent)
+				},
+				jsonp: "callbackparam",
+				jsonpCallback: "callback"
+			})
+			.done(function() {
+				me.updateDom(me.uid, me.rid, false);
+				$("#sendinput").val("");
+			});
 	},
 	//忽略用户
 	ignoreUser: function() {
-
+		var me = this;
+		$.ajax({
+				url: me.getUrl + "/mo/ignore",
+				type: 'GET',
+				dataType: 'jsonp',
+				data: {
+					"uid": me.uid,
+					"rid": me.rid
+				},
+				jsonp: "callbackparam",
+				jsonpCallback: "callback"
+			})
+			.done(function() {
+				var n = noty({
+					text: '已忽略！',
+					closeWith: ['click'],
+					theme: 'relax',
+					type: 'information',
+					layout: 'bottomRight',
+					timeout: 2000,
+					animation: {
+						open: {
+							height: 'toggle'
+						},
+						close: {
+							height: 'toggle'
+						},
+						easing: 'swing',
+						speed: 500
+					}
+				});
+				me.destroyLoop();
+			});
+	},
+	//清除循环查询
+	destroyLoop: function() {
+		var me = this;
+		if (me.loop) {
+			window.clearTimeout(me.loop);
+			me.loop = false;
+		}
+	},
+	//渲染消息
+	_renderMsg: function(contentData) {
+		//转json
+		try {
+			var data = eval("(" + contentData + ")");
+		} catch (e) {
+			var data = contentData;
+		}
+		//1文字 2图片 3语音 4心跳
+		switch (data.chatType) {
+			case 1:
+				return data.content;
+				break;
+			case 2:
+				return '<img src="' + data.url + '" alt="">';
+				break;
+			case 3:
+				return '<i class="fa fa-volume-up playaudio" onclick="play_A_NoUi(this)" data-url="' + data.url + '"></i>';
+				break;
+			case 4:
+				return '<i class="fa fa-heart heartbeat"></i>';
+				break;
+			default:
+				return data;
+				break;
+		}
+	},
+	//获取用户所在位置
+	_getLocation: function(data) {
+		var lProvince = data.province ? locationMap[data.province] + " - " : "",
+			lCity = data.city ? locationMap[data.city] + " - " : "",
+			lDistrict = data.district ? locationMap[data.district] : "未知";
+		return lProvince + lCity + lDistrict;
+	},
+	//绑定事件
+	_bendEvent: function() {
+		var list = this;
 	}
 };
 $(function() {
 	$("#chatUserlist").height($(".top-box").height() - $(".bottom-box").height() - 65);
 	chatUserlist.init();
+	//监听回车键
+	$("#sendinput").keydown(function(event) {
+		if (event.which == '13') {
+			chatDOM.sendMsg();
+			return false;
+		}
+	});
+	//忽略用户
+	$("#ignoreBtn").unbind('click').bind('click', function(event) {
+		chatDOM.ignoreUser();
+	});
+	//发送消息
+	$("#sendBtn").unbind('click').bind('click', function(event) {
+		chatDOM.sendMsg();
+	});
 });
+//播放音频
+function play_A_NoUi(e) {
+	var u = $(e).data("url");
+	if ($("#audioReplyPlay") && ($("#audioReplyPlay embed").attr("src") == u)) {
+		$("#audioReplyPlay").remove();
+		return;
+	} else if ($("#audioReplyPlay") && ($("#audioReplyPlay embed").attr("src") != u)) {
+		$("#audioReplyPlay").remove();
+	}
+	var pv = '';
+	pv += '<param name="src" value="' + u + '">';
+	pv += '<param name="controller" value="true">';
+	pv += '<param name="type" value="video/quicktime">';
+	pv += '<param name="autoplay" value="true">';
+	pv += '<param name="target" value="myself">';
+	pv += '<param name="bgcolor" value="black">';
+	pv += '<param name="pluginspage" value="http://www.apple.com/quicktime/download/index.html">';
+	pv += '<embed src="' + u + '" width="0" height="0" controller="true" align="middle" bgcolor="transparent" target="myself" type="video/quicktime" pluginspage="http://www.apple.com/quicktime/download/index.html"></embed>';
+	var player = document.createElement("object");
+	$(player).html(pv);
+	$(player).attr({
+		id: "audioReplyPlay",
+		width: 0,
+		height: 0,
+		classid: "clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B",
+		codebase: "http://www.apple.com/qtactivex/qtplugin.cab"
+	});
+	$("body").append(player);
+}

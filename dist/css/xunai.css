@@ -34,8 +34,16 @@ body{font-family:"微软雅黑";}
 .head-check-item input[type=checkbox]{display:none;}
 .pagination{margin:0;margin-right:20px;float:right;}
 .chat-count{float:right;margin-right:20px;}
-.info-box-icon .user-image{width:90px;height:90px;vertical-align:top;}
-.info-box-text{line-height:26px;}
+.info-box{
+	margin-bottom: 0;
+	min-height: 60px;
+}
+.info-box-icon{
+	height: 60px;
+	width: 60px;
+}
+.info-box-icon .user-image{width:60px;height:60px;vertical-align:top;}
+.info-box-text{line-height:18px;}
 .chat-user-list.nav-stacked>li.active>a,
 .chat-user-list.nav-stacked>li.active>a:hover{background-color:#3c8dbc;border-top:0;border-left-color:#3c8dbc;color:#fff;}
 #chatUserlist{overflow:auto;}
@@ -44,7 +52,37 @@ body{font-family:"微软雅黑";}
 .margin-left-0{margin-left:0;}
 .btn-app.btn-warning{background-color:#f39c12;color:#fff;}
 #roleList>li{display:none;}
-.direct-chat-name{float: left;}
-.right .direct-chat-name{float: right;}
-.direct-chat-timestamp{float: right;}
-.right .direct-chat-timestamp{float: left;}
+.direct-chat-name{float:left;}
+.right .direct-chat-name{float:right;}
+.direct-chat-timestamp{float:right;}
+.right .direct-chat-timestamp{float:left;}
+.heartbeat{color:#ff0000;font-size:20px;-webkit-animation:heartbeat 2s linear infinite;-moz-animation:heartbeat 2s linear infinite;-o-animation:heartbeat 2s linear infinite;animation:heartbeat 2s linear infinite;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;}
+@-webkit-keyframes heartbeat{
+	0%{-webkit-transform:scale(.9,.9);}
+	25%{-webkit-transform:scale(1.2,1.2);}
+	50%{-webkit-transform:scale(.9,.9);}
+	75%{-webkit-transform:scale(1.2,1.2);}
+	100%{-webkit-transform:scale(1,1);}
+}
+@-moz-keyframes heartbeat{
+	0%{-moz-transform:scale(0,0);}
+	25%{-moz-transform:scale(1.3,1.3);}
+	50%{-moz-transform:scale(.9,.9);}
+	75%{-moz-transform:scale(1.2,1.2);}
+	100%{-moz-transform:scale(1,1);}
+}
+@-o-keyframes heartbeat{
+	0%{-o-transform:scale(0,0);}
+	25%{-o-transform:scale(1.3,1.3);}
+	50%{-o-transform:scale(.9,.9);}
+	75%{-o-transform:scale(1.2,1.2);}
+	100%{-o-transform:scale(1,1);}
+}
+@keyframes heartbeat{
+	0%{transform:scale(0,0);}
+	25%{transform:scale(1.3,1.3);}
+	50%{transform:scale(.9,.9);}
+	75%{transform:scale(1.2,1.2);}
+	100%{transform:scale(1,1);}
+}
+.playaudio{color:#6633CC;font-size: 24px;cursor: pointer;}

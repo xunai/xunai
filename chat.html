@@ -114,7 +114,7 @@
             <p class="chat-count">今天已发送：1200句，与140个用户完成聊天
             </p>
           </div>
-          <div class="col-md-9">
+          <div class="col-sm-9">
             <div class="box-body direct-chat-info">
               <!-- 消息列表 -->
               <div class="direct-chat-messages" id="chat-list">
@@ -145,22 +145,22 @@
             <div class="box-body">
               <form role="form">
                 <div class="form-group col-xs-2 text-right">
-                  <button class="btn btn-app btn-warning">
+                  <button type="button" class="btn btn-app btn-warning" id="ignoreBtn">
                   屏蔽
                   </button>
                 </div>
                 <div class="form-group col-xs-8">
-                  <textarea class="form-control" rows="3" placeholder="回车键也可以发送"></textarea>
+                  <textarea class="form-control" rows="3" id="sendinput" placeholder="回车键也可以发送"></textarea>
                 </div>
                 <div class="form-group col-xs-2">
-                  <button class="btn btn-app btn-primary margin-left-0">
+                  <button type="button" class="btn btn-app btn-primary margin-left-0" id="sendBtn">
                   发送
                   </button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-sm-3">
             <ul class="nav nav-pills nav-stacked chat-user-list" id="chatUserlist">
             </ul>
             <div class="box box-primary bottom-box">
@@ -202,8 +202,11 @@
     <script src='plugins/fastclick/fastclick.min.js'></script>
     <!-- AdminLTE App -->
     <script src="lib/AdminLTE/js/app.js" type="text/javascript"></script>
+    <!-- noty -->
+    <script src="lib/noty/packaged/jquery.noty.packaged.min.js" type="text/javascript"></script>
     
     <script src="dist/js/xunai.js" type="text/javascript"></script>
+    <script src="dist/js/dataMap.js" type="text/javascript"></script>
     <script src="dist/js/chat.js" type="text/javascript"></script>
   </body>
 </html>

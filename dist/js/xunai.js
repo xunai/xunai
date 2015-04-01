@@ -4,11 +4,15 @@ $(function() {
             g_loginuser.loginOut();
       });
       var window_height = $(window).height();
-      if ($(".top-box").hasClass('no-toolbar')) {
-            $(".top-box").css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight());
-      } else {
-            $(".top-box").css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight() - 125);
-      }
+      $(".top-box").each(function(index, el) {
+            var tbox = $(el);
+            if (tbox.hasClass('no-toolbar')) {
+                  tbox.css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight());
+            } else {
+                  tbox.css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight() - 125);
+            }
+
+      });
       var otheight = 0;
       $(".direct-chat-messages").parent().parent().children(".box-body:gt(0)").each(function(index, element) {
             otheight += $(element).height();
@@ -22,7 +26,7 @@ var g_loginuser = {
       xunai_username: '',
       xunai_role: '',
       xunai_uid: '',
-      timeout: 12 * 60 * 60 * 100,
+      timeout: 12 * 60 * 60 * 1000,
       //获取登录人信息
       getLoginstate: function() {
             var me = this,
@@ -93,6 +97,7 @@ var g_loginuser = {
             window.location.href = "login.html";
       }
 };
+//全局ajax请求地址
 var g_host = "http://aus.appforwhom.com/aus/";
 //日期格式化
 Date.prototype.format = function(format) {
