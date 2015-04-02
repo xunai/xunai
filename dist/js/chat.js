@@ -21,7 +21,8 @@ var chatUserlist = {
 				dataType: 'jsonp',
 				data: {
 					"size": pageSize,
-					"page": pageNum
+					"page": pageNum,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -87,7 +88,8 @@ var chatDOM = {
 				dataType: 'jsonp',
 				data: {
 					"uid": me.uid,
-					"rid": me.rid
+					"rid": me.rid,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -161,6 +163,9 @@ var chatDOM = {
 		for (var i = 0; i < chatContent.length; i++) {
 			renderChat(chatContent[i], rData, uData);
 		}
+		$("#chat-list").scrollTo('.direct-chat-msg:last', 500, {
+			margin: true
+		});
 		me.loop = window.setTimeout(function() {
 			me.updateDom();
 		}, me.loopTime);
@@ -170,7 +175,7 @@ var chatDOM = {
 		var me = this,
 			sendContent = $("#sendinput").val(),
 			sendData = "";
-		if (sendContent == ""){
+		if (sendContent == "") {
 			return false;
 		} else {
 			sendData = '{"chatType":1,"content":"' + sendContent + '"}';
@@ -182,7 +187,8 @@ var chatDOM = {
 				data: {
 					"uid": me.uid,
 					"rid": me.rid,
-					"content": encodeURI(sendData)
+					"content": encodeURI(sendData),
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -201,7 +207,8 @@ var chatDOM = {
 				dataType: 'jsonp',
 				data: {
 					"uid": me.uid,
-					"rid": me.rid
+					"rid": me.rid,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"

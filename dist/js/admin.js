@@ -22,7 +22,8 @@ var feedList = {
 				dataType: 'jsonp',
 				data: {
 					"size": pageSize,
-					"page": pageNum
+					"page": pageNum,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"

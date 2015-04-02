@@ -117,3 +117,25 @@ Date.prototype.format = function(format) {
                   format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
       return format;
 };
+//加载dom
+var g_loadMode = {
+      load: '',
+      init: function(dom){
+            var me = this,
+            parent = dom,
+            loadDom = document.createElement("div");
+            $(loadDom).addClass('load-modal');
+            $(loadDom).html('<span class="loading-inner"></span><span class="loading-middle"></span><span class="loading-exterior"></span>');
+            parent.prepend(loadDom);
+            me.load = $(loadDom);
+            return me.load;
+      },
+      show: function(){
+            var me = this;
+            me.load.show();
+      },
+      hide: function(){
+            var me = this;
+            me.load.fadeOut();
+      }
+};

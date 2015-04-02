@@ -12,6 +12,7 @@ var faceList = {
 	getUrl: g_host + "/ba/1/ck/x/7u/1n/a/2i/sy/st/m",
 	page: [0, 0, 0, 0],
 	state: 1,
+	load: '',
 	//初始化
 	init: function() {
 		var me = this;
@@ -26,7 +27,8 @@ var faceList = {
 				type: 'GET',
 				dataType: 'jsonp',
 				data: {
-					"state": state
+					"state": state,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -45,13 +47,19 @@ var faceList = {
 	//获取当前页列表
 	getList: function(state, pageNum) {
 		var me = this;
+		if (me.load === "") {
+			me.load = g_loadMode.init($("#adminContent"));
+		} else {
+			me.load.show();
+		}
 		$.ajax({
 			url: me.getUrl + "/fv/list",
 			type: 'GET',
 			dataType: 'jsonp',
 			data: {
 				"state": state,
-				"page": pageNum
+				"page": pageNum,
+				"userid": parseInt(g_loginuser.xunai_uid)
 			},
 			jsonp: "callbackparam",
 			jsonpCallback: "callback"
@@ -62,6 +70,7 @@ var faceList = {
 					me._renderNocheck(data);
 					me.getCount(me.state);
 					me._rebendEvent();
+					me.load.fadeOut();
 					break;
 				case 2:
 					break;
@@ -69,6 +78,7 @@ var faceList = {
 					me._renderRefusecheck(data);
 					me.getCount(me.state);
 					me._rebendEvent();
+					me.load.fadeOut();
 					break;
 			}
 		});
@@ -98,7 +108,8 @@ var faceList = {
 				dataType: 'jsonp',
 				data: {
 					"state": 2,
-					"id": id
+					"id": id,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -128,7 +139,8 @@ var faceList = {
 				dataType: 'jsonp',
 				data: {
 					"state": 3,
-					"id": id
+					"id": id,
+					"userid": parseInt(g_loginuser.xunai_uid)
 				},
 				jsonp: "callbackparam",
 				jsonpCallback: "callback"
@@ -155,7 +167,8 @@ var faceList = {
 			type: 'GET',
 			dataType: 'jsonp',
 			data: {
-				"nick": encodeURI(nick)
+				"nick": encodeURI(nick),
+				"userid": parseInt(g_loginuser.xunai_uid)
 			},
 			jsonp: "callbackparam",
 			jsonpCallback: "callback"
