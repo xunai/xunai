@@ -97,7 +97,7 @@ var dateTree = {
 			dom.fadeOut(function() {
 				var dom = $(this);
 				dom.remove();
-				me.getList();
+				me.getList(me.state);
 			});
 		});
 	},
@@ -124,6 +124,7 @@ var dateTree = {
 			dom.fadeOut(function() {
 				var dom = $(this);
 				dom.remove();
+				me.getList(me.state);
 			});
 		});
 	},
