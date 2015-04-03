@@ -52,7 +52,7 @@ var dateTree = {
 			jsonp: "callbackparam",
 			jsonpCallback: "callback"
 		}).done(function(data) {
-			if (data === null) {
+			if (data === null||!data) {
 				me.load.fadeOut();
 				return;
 			}
