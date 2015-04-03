@@ -8,10 +8,12 @@ $(function() {
             var tbox = $(el);
             if (tbox.hasClass('no-toolbar')) {
                   tbox.css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight());
-            } else {
+            } else if(tbox.hasClass('innerbox')){
+                  tbox.css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight() - 185);
+            }
+            else {
                   tbox.css('height', window_height - $('.main-footer').outerHeight() - $('.bottom-box').outerHeight() - 125);
             }
-
       });
       var otheight = 0;
       $(".direct-chat-messages").parent().parent().children(".box-body:gt(0)").each(function(index, element) {
@@ -60,8 +62,8 @@ var g_loginuser = {
                   roleinf,
                   hrefarray = [],
                   hasRole = false;
-            $(".loginnick").text(me.xunai_nick);
-            $(".loginname").text(me.xunai_username);
+            $(".loginnick").text(me.xunai_username);
+            $(".loginname").text(me.xunai_nick);
             //判断权限
             roleinf = me.xunai_role.split("");
             $("#roleList").children('li').each(function(index, el) {
@@ -117,7 +119,7 @@ Date.prototype.format = function(format) {
                   format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
       return format;
 };
-//加载dom
+//加载dom模块
 var g_loadMode = {
       load: '',
       init: function(dom){

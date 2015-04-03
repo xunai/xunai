@@ -16,16 +16,22 @@ var dateTree = {
 		"0": "9223372036854775807",
 		"1": "9223372036854775807"
 	},
+	lastUtime:{
+		"-1": "9223372036854775807",
+		"0": "9223372036854775807",
+		"1": "9223372036854775807"
+	},
 	size: 5,
 	state: 0,
 	sex: 1, //1：男 2：女
 	load: '',
 	init: function() {
 		var me = this;
+		me.sex = 1;
 		me.getList(me.state);
 	},
 	//获取当前页列表
-	getList: function(state, utime, sex) {
+	getList: function(state, utime, sex, needRefresh) {
 		var me = this;
 		if (me.load === "") {
 			me.load = g_loadMode.init($("#adminContent"));
@@ -48,16 +54,16 @@ var dateTree = {
 		}).done(function(data) {
 			switch (state) {
 				case 0:
-					me._renderNocheck(data);
+					needRefresh ? me._renderNocheck(data, needRefresh) : me._renderNocheck(data);
 					me._rebendEvent();
 					me.load.fadeOut();
 					break;
 				case 1:
-					me._renderChecked(data);
+					needRefresh ? me._renderChecked(data, needRefresh) : me._renderChecked(data);
 					me.load.fadeOut();
 					break;
 				case -1:
-					me._renderRefusecheck(data);
+					needRefresh ? me._renderRefusecheck(data, needRefresh) : me._renderRefusecheck(data);
 					me._rebendEvent();
 					me.load.fadeOut();
 					break;
@@ -67,7 +73,7 @@ var dateTree = {
 	//加载更多
 	loadMore: function() {
 		var me = this;
-		me.getList(me.state, me.page[me.state] + 1);
+		me.getList();
 	},
 	//通过审核
 	passCheck: function(id, dom) {
@@ -87,6 +93,7 @@ var dateTree = {
 			dom.fadeOut(function() {
 				var dom = $(this);
 				dom.remove();
+				me.getList();
 			});
 		});
 	},
@@ -110,7 +117,7 @@ var dateTree = {
 			jsonp: "callbackparam",
 			jsonpCallback: "callback"
 		}).done(function(data) {
-			$(".head-check-item[data-checkid=" + id + "]").fadeOut(function() {
+			dom.fadeOut(function() {
 				var dom = $(this);
 				dom.remove();
 			});
@@ -121,45 +128,54 @@ var dateTree = {
 
 	},
 	//渲染未审核
-	_renderNocheck: function(data) {
+	_renderNocheck: function(data, needRefresh) {
 		var me = this,
 			newTime = 0;
-		// $("#noCheckList").html("");
+		if (needRefresh) {
+			$("#noCheckList").html("");
+		}
 		for (var i = 0; i < data.length; i++) {
 			var htmlstr = '<tr><td><img src="' + data[i].photo + '" class="img-head" alt="User Image" /></td>' +
-				'<td>' + data[i].content + '</td><td><button type="button" class="btn btn-info btn-block">通过</button>' +
+				'<td>' + data[i].content + '</td><td><button type="button" data-checkid="' + data[i].id + '" class="btn btn-info btn-block">通过</button>' +
 				'<button type="button" data-rtype="1" data-checkid="' + data[i].id + '" class="btn btn-info btn-block btn-refuse">图片审核不通过</button>' +
 				'<button type="button" data-rtype="2" data-checkid="' + data[i].id + '" class="btn btn-info btn-block btn-refuse">帖子内容不适合</button></td></tr>';
 			$("#noCheckList").append(htmlstr);
 			newTime = data[i].utime;
 		}
+		me.lastUtime[me.state] = me.utime[me.state];
 		me.utime[me.state] = newTime;
 	},
 	//渲染已审核
-	_renderChecked: function(data) {
+	_renderChecked: function(data, needRefresh) {
 		var me = this,
 			newTime = 0;
-		// $("#checkedList").html("");
+		if (needRefresh) {
+			$("#checkedList").html("");
+		}
 		for (var i = 0; i < data.length; i++) {
 			var htmlstr = '<tr><td><img src="' + data[i].photo + '" class="img-head" alt="User Image" /></td>' +
 				'<td>' + data[i].content + '</td></tr>';
 			$("#checkedList").append(htmlstr);
 			newTime = data[i].utime;
 		}
+		me.lastUtime[me.state] = me.utime[me.state];
 		me.utime[me.state] = newTime;
 	},
 	//渲染不通过审核
-	_renderRefusecheck: function(data) {
+	_renderRefusecheck: function(data, needRefresh) {
 		var me = this,
 			newTime = 0;
-		// $("#refuseList").html("");
+		if (needRefresh) {
+			$("#refuseList").html("");
+		}
 		for (var i = 0; i < data.length; i++) {
 			var htmlstr = '<tr><td><img src="' + data[i].photo + '" class="img-head" alt="User Image" /></td>' +
 				'<td>' + data[i].content + '</td><td>' +
-				'<button type="button" class="btn btn-info btn-block btn-pass">通过</button></td></tr>';
+				'<button type="button" data-checkid="' + data[i].id + '" class="btn btn-info btn-block btn-pass">通过</button></td></tr>';
 			$("#refuseList").append(htmlstr);
 			newTime = data[i].utime;
 		}
+		me.lastUtime[me.state] = me.utime[me.state];
 		me.utime[me.state] = newTime;
 	},
 	//绑定固定事件
@@ -167,7 +183,17 @@ var dateTree = {
 		var list = this;
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 			list.state = parseInt($(e.target).data('state'));
+			if (list.utime[list.state] == "9223372036854775807") {
+				list.init();
+			}
+		});
+		$('a.btn-loadmore').unbind('click').bind('click', function(event) {
 			list.init();
+		});
+		$('input[type=radio]').unbind('change').bind('change', function(event) {
+			var me = $(this),
+				sexRadio = me.parents(".btn-group").find("input[type=radio]:checked");
+			list.getList(list.state, "9223372036854775807", sexRadio.val(), true);
 		});
 	},
 	//重新绑定事件
