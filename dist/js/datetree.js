@@ -87,7 +87,7 @@ var dateTree = {
 			type: 'GET',
 			dataType: 'jsonp',
 			data: {
-				"state": 2,
+				"state": 1,
 				"id": id,
 				"userid": parseInt(g_loginuser.xunai_uid)
 			},
