@@ -48,7 +48,7 @@ var adminList = {
 			userData = g_usermap[me.userGroup[me.userIndex]],
 			rowStr = "<td><p>已聊用户：" + data.chatUsers + "</p>" +
 			"<p>已聊：" + data.chats + "</p>" +
-			"<p>已审核头像：" + data.chats + "</p>" +
+			"<p>已审核头像：" + data.faceVerifies + "</p>" +
 			"<p>已审核身份：" + data.idcardVerifies + "</p>" +
 			"<p>已审核相亲树：" + data.lovetreeVerifies + "</p></td>";
 		me.insertText += rowStr;
@@ -61,7 +61,7 @@ var adminList = {
 			userData = g_usermap[me.userGroup[me.userIndex]],
 			rowStr = "<td><p>已聊用户：" + data.chatUsers + "</p>" +
 			"<p>已聊：" + data.chats + "</p>" +
-			"<p>已审核头像：" + data.chats + "</p>" +
+			"<p>已审核头像：" + data.faceVerifies + "</p>" +
 			"<p>已审核身份：" + data.idcardVerifies + "</p>" +
 			"<p>已审核相亲树：" + data.lovetreeVerifies + "</p></td>";
 		me.insertText += rowStr;
