@@ -142,6 +142,10 @@ var feedList = {
 				jsonpCallback: "callback"
 			})
 			.done(function(data) {
+				if (data === null) {
+					me.load.fadeOut();
+					return;
+				}
 				me.page = pageNum;
 				me._render(data);
 				me._bendEvent();

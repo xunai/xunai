@@ -65,6 +65,10 @@ var faceList = {
 			jsonpCallback: "callback"
 		}).done(function(data) {
 			me.page[me.state] = pageNum;
+				if (data === null) {
+					me.load.fadeOut();
+					return;
+				}
 			switch (state) {
 				case 1:
 					me._renderNocheck(data);

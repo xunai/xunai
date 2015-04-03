@@ -283,9 +283,32 @@ var chatDOM = {
 		var list = this;
 	}
 };
+var chatInfo = {
+	getUrl: g_host + "/ba/1/ck/x/7u/1n/a/2i/sy/st/m",
+	init: function() {
+		var me = this;
+		$.ajax({
+			url: me.getUrl + "/admin/action",
+			type: 'GET',
+			dataType: 'jsonp',
+			data: {
+				"userid": parseInt(g_loginuser.xunai_uid),
+				"type": 1
+			},
+			jsonp: "callbackparam",
+			jsonpCallback: "callback"
+		}).done(function(data) {
+			me.renderInfo(data);
+		});
+	},
+	renderInfo: function(data) {
+		$("#chatinfo").html("今天已发送：" + data.chats + "句，与" + data.chatUsers + "个用户完成聊天");
+		chatUserlist.init();
+	}
+};
 $(function() {
 	$("#chatUserlist").height($(".top-box").height() - $(".bottom-box").height() - 65);
-	chatUserlist.init();
+	chatInfo.init();
 	//监听回车键
 	$("#sendinput").keydown(function(event) {
 		if (event.which == '13') {

@@ -16,7 +16,7 @@ var dateTree = {
 		"0": "9223372036854775807",
 		"1": "9223372036854775807"
 	},
-	lastUtime:{
+	lastUtime: {
 		"-1": "9223372036854775807",
 		"0": "9223372036854775807",
 		"1": "9223372036854775807"
@@ -52,6 +52,10 @@ var dateTree = {
 			jsonp: "callbackparam",
 			jsonpCallback: "callback"
 		}).done(function(data) {
+			if (data === null) {
+				me.load.fadeOut();
+				return;
+			}
 			switch (state) {
 				case 0:
 					needRefresh ? me._renderNocheck(data, needRefresh) : me._renderNocheck(data);
