@@ -140,7 +140,7 @@ var dateTree = {
 		}
 		for (var i = 0; i < data.length; i++) {
 			var htmlstr = '<tr><td><img src="' + data[i].photo + '" class="img-head" alt="User Image" /></td>' +
-				'<td>' + data[i].content + '</td><td><button type="button" data-checkid="' + data[i].id + '" class="btn btn-info btn-block">通过</button>' +
+				'<td>' + data[i].content + '</td><td><button type="button" data-checkid="' + data[i].id + '" class="btn btn-info btn-block btn-pass">通过</button>' +
 				'<button type="button" data-rtype="1" data-checkid="' + data[i].id + '" class="btn btn-info btn-block btn-refuse">图片审核不通过</button>' +
 				'<button type="button" data-rtype="2" data-checkid="' + data[i].id + '" class="btn btn-info btn-block btn-refuse">帖子内容不适合</button></td></tr>';
 			$("#noCheckList").append(htmlstr);
