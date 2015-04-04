@@ -189,7 +189,7 @@ var dateTree = {
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 			list.state = parseInt($(e.target).data('state'));
 			list.utime[list.state] = "9223372036854775807";
-			list.init();
+			list.getList(list.state, "9223372036854775807", list.sex, true);
 		});
 		$('a.btn-loadmore').unbind('click').bind('click', function(event) {
 			list.init();
