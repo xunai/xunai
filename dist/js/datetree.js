@@ -188,9 +188,8 @@ var dateTree = {
 		var list = this;
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 			list.state = parseInt($(e.target).data('state'));
-			if (list.utime[list.state] == "9223372036854775807") {
-				list.init();
-			}
+			list.utime[list.state] = "9223372036854775807";
+			list.init();
 		});
 		$('a.btn-loadmore').unbind('click').bind('click', function(event) {
 			list.init();
