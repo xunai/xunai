@@ -23,7 +23,11 @@ var dateTree = {
 	},
 	size: 5,
 	state: 0,
-	sex: 1, //1：男 2：女
+	sex: {
+		"-1":1,
+		"0":1,
+		"1":1
+	}, //1：男 2：女
 	load: '',
 	init: function() {
 		var me = this;
@@ -45,7 +49,7 @@ var dateTree = {
 			data: {
 				"state": state || me.state,
 				"utime": utime || me.utime[me.state],
-				"sex": sex || me.sex,
+				"sex": sex || me.sex[me.state],
 				"size": me.size,
 				"userid": parseInt(g_loginuser.xunai_uid)
 			},
@@ -189,7 +193,7 @@ var dateTree = {
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 			list.state = parseInt($(e.target).data('state'));
 			list.utime[list.state] = "9223372036854775807";
-			list.getList(list.state, "9223372036854775807", list.sex, true);
+			list.getList(list.state, "9223372036854775807", list.sex[list.state], true);
 		});
 		$('a.btn-loadmore').unbind('click').bind('click', function(event) {
 			list.init();
@@ -197,6 +201,7 @@ var dateTree = {
 		$('input[type=radio]').unbind('change').bind('change', function(event) {
 			var me = $(this),
 				sexRadio = me.parents(".btn-group").find("input[type=radio]:checked");
+				list.sex[list.state] = sexRadio.val();
 			list.getList(list.state, "9223372036854775807", sexRadio.val(), true);
 		});
 	},

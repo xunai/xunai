@@ -74,7 +74,7 @@ var g_loginuser = {
             });
             var locationHref = window.location.pathname.split("/")[window.location.pathname.split("/").length -1]
             for (var i = 0; i < hrefarray.length; i++) {
-                  if (hrefarray[i] == window.location.pathname.split("/")[1]) {
+                  if (hrefarray[i] == locationHref) {
                         hasRole = true;
                   }
             }
