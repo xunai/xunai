@@ -31,7 +31,6 @@ var dateTree = {
 	load: '',
 	init: function() {
 		var me = this;
-		me.sex = 1;
 		me.getList(me.state);
 	},
 	//获取当前页列表
