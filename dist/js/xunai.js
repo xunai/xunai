@@ -72,6 +72,7 @@ var g_loginuser = {
                         hrefarray.push($(el).find("a").attr('href'));
                   }
             });
+            var locationHref = window.location.pathname.split("/")[window.location.pathname.split("/").length -1]
             for (var i = 0; i < hrefarray.length; i++) {
                   if (hrefarray[i] == window.location.pathname.split("/")[1]) {
                         hasRole = true;
